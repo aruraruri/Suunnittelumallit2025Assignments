@@ -1,0 +1,1 @@
+# Suunnittelumallit2025Assignments
