@@ -8,10 +8,10 @@ public class WildernessMap extends Map {
     List<String> tileTypes = Arrays.asList("Swamp", "Forest", "Water");
     @Override
     public Tile createTile() {
-        // Randomly select a tile type from the list
+        // random select tile type from list
         int randomIndex = (int) (Math.random() * tileTypes.size());
         String tileType = tileTypes.get(randomIndex);
-        // Create a new Tile object based on the selected type
+        // new Tile object of the selected type
         return switch (tileType) {
             case "Swamp" -> new SwampTile();
             case "Forest" -> new ForestTile();
@@ -22,16 +22,15 @@ public class WildernessMap extends Map {
 
     @Override
     public void display() {
-        // Display the tiles in the city map
         System.out.println("Wilderness Map Tiles:");
         List<Tile> tiles = new ArrayList<>();
-        for (int i = 0; i < 25; i++) { // Create 10 random tiles
+        for (int i = 0; i < 25; i++) { // create 25 tiles
             tiles.add(createTile());
         }
         for (int i = 0; i < tiles.size(); i++) {
             System.out.print(tiles.get(i).getCharacter()+" ");
             if ((i + 1) % 5 == 0) {
-                System.out.println(); // New line after every 5 tiles
+                System.out.println(); // line break every 5 tiles
             }
         }
     }
