@@ -1,5 +1,5 @@
 package AbstractFactoryMethod;
 
-public abstract class TextField {
+public abstract class AbstractCheckbox {
     public abstract void display();
 }
