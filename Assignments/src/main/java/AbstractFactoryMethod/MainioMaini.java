@@ -10,5 +10,13 @@ public class MainioMaini {
 
         AbstractButton button = factory.createButton("sKIBIDI");
         button.display();
+
+        AbstractCheckbox checkbox = factory.createCheckbox(" ");
+        checkbox.display();
+
+        AbstractTextField textField = factory.createTextField("write some moore");
+        textField.display();
+        textField.setText("write some more");
+        textField.display();
     }
 }

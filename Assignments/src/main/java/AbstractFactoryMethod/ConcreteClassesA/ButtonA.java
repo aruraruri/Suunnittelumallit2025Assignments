@@ -9,6 +9,10 @@ public class ButtonA extends AbstractButton {
 
     @Override
     public void display() {
-        System.out.println("Displaying Button A");
+        int width = Math.max(5, text.length() + 4);
+        String border = "*" + "~".repeat(width - 2) + "*";
+        System.out.println(border);
+        System.out.println("|| " + String.format("%-" + (width - 4) + "s", text) + " ||");
+        System.out.println(border);
     }
 }

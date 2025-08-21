@@ -13,11 +13,11 @@ public class ConcreteUIFactoryB extends AbstractUIFactory {
 
     @Override
     public AbstractCheckbox createCheckbox(String text) {
-        return null;
+        return new CheckboxB(text);
     }
 
     @Override
     public AbstractTextField createTextField(String text) {
-        return null;
+        return new TextFieldB(text);
     }
 }

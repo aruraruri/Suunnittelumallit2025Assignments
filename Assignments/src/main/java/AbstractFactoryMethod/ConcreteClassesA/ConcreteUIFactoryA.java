@@ -8,16 +8,14 @@ import AbstractFactoryMethod.AbstractUIFactory;
 public class ConcreteUIFactoryA extends AbstractUIFactory {
     @Override
     public AbstractButton createButton(String text) {
-        return null;
+        return new ButtonA(text);
     }
 
     @Override
-    public AbstractCheckbox createCheckbox(String text) {
-        return null;
-    }
+    public AbstractCheckbox createCheckbox(String text) {return new CheckboxA(text); }
 
     @Override
     public AbstractTextField createTextField(String text) {
-        return null;
+        return new TextFieldA(text);
     }
 }
