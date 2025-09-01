@@ -6,14 +6,10 @@ import java.io.IOException;
 public class Logger {
     private static Logger instance;
     private FileWriter writer;
+    private String fileName;
 
     private Logger() {
-        try {
-            writer = new FileWriter("log.txt");
-        } catch (IOException error) {
-            error.printStackTrace();
-        }
-    }
+        this.fileName = "log.txt";}
 
     public static Logger getInstance() {
         if (instance == null) {
@@ -24,17 +20,28 @@ public class Logger {
 
     public void write(String logEntry) {
         try {
+            if (writer == null) {
+                writer = new FileWriter(fileName, true); // Append mode
+            }
             writer.write("\n" + logEntry);
+            writer.flush(); // Ensure data is written immediately
         } catch (IOException error) {
             error.printStackTrace();
         }
     }
 
     public void setFileName(String fileName) {
-        try {
-            writer = new FileWriter(fileName);
-        } catch (IOException error) {
-            error.printStackTrace();
+        // Only set the file name, don't create the file yet
+        this.fileName = fileName;
+
+        // If writer already exists, close it so next write will use new file
+        if (writer != null) {
+            try {
+                writer.close();
+            } catch (IOException error) {
+                error.printStackTrace();
+            }
+            writer = null; // Reset writer so it gets recreated with new file
         }
     }
 
