@@ -2,7 +2,7 @@ package TemplateMethod;
 
 public class Player {
     private String name;
-    private String playerLocation = "o";
+    private String playerPosition = "o";
 
     public Player(String name) {
         this.name = name;
@@ -12,11 +12,11 @@ public class Player {
         return name;
     }
 
-    public String getPlayerLocation() {
-        return playerLocation;
+    public String getPosition() {
+        return playerPosition;
     }
 
-    public void movePlayerRight() {
-        playerLocation = " " + playerLocation;
+    public void moveRight() {
+        playerPosition = " " + playerPosition;
     }
 }
