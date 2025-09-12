@@ -19,7 +19,7 @@ public class Main {
         // change sort type here
         SorterContext sorter = new SorterContext(new HeapSort());
         //sorter.setSortStrategy(new BubbleSort());
-        sorter.setSortStrategy(new QuickSort());
+        //sorter.setSortStrategy(new QuickSort());
 
         long sortBigStartTimeMs = System.nanoTime() / 1000000;
         sorter.sort(bigIntArray);
