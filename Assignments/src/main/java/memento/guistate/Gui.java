@@ -1,9 +1,11 @@
 package memento.guistate;
 
+import Observer.Observable;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -18,6 +20,7 @@ public class Gui extends Application {
     private ColorBox colorBox2;
     private ColorBox colorBox3;
     private CheckBox checkBox;
+    private ListView<String> historyMetaData;
 
     public void start(Stage stage) {
 
@@ -54,6 +57,10 @@ public class Gui extends Application {
             controller.setIsSelected(checkBox.isSelected());
         });
 
+        // history scene
+        historyMetaData = new ListView<>();
+        Scene historyScene = new Scene(historyMetaData);
+
         // Set the HBox to be the root of the Scene
         Scene scene = new Scene(vBox);
         scene.setOnKeyPressed(event -> {
@@ -62,12 +69,23 @@ public class Gui extends Application {
                 System.out.println("Undo key combination pressed");
                 controller.undo();
             }
+            if (event.isControlDown() && event.getCode() == KeyCode.Y) {
+                // Ctrl-Y: redo
+                System.out.println("Redo key combination pressed");
+                controller.redo();
+            }
         });
 
+
+        Stage historyStage = new Stage();
+        historyStage.setScene(historyScene);
+        historyStage.setTitle("Undo History");
+        historyStage.show();
 
         stage.setScene(scene);
         stage.setTitle("Memento Pattern Example");
         stage.show();
+        historyStage.show();
     }
 
     public void updateGui() {
@@ -76,5 +94,25 @@ public class Gui extends Application {
         colorBox2.setColor(controller.getOption(2));
         colorBox3.setColor(controller.getOption(3));
         checkBox.setSelected(controller.getIsSelected());
+
+        // update undo history list
+        historyMetaData.getItems().clear();
+        for (IMemento memento : controller.getHistory()) {
+            historyMetaData.getItems().add(String.valueOf(memento.getTime()));
+        }
+        // same for redo history
+        for (IMemento memento : controller.getRedoHistory()) {
+            historyMetaData.getItems().add(String.valueOf(memento.getTime()));
+        }
+        // add keypress observers to all history list items
+        historyMetaData.setOnMouseClicked(event -> {
+            int selectedIndex = historyMetaData.getSelectionModel().getSelectedIndex();
+            if (selectedIndex >= 0 && selectedIndex < controller.getHistory().size()) {
+                IMemento selectedMemento = controller.getHistory().get(selectedIndex);
+                controller.restoreState(selectedMemento);
+            }
+            controller.reorganizeHistoriesAroundIndex(selectedIndex);
+            updateGui();
+        });
     }
 }

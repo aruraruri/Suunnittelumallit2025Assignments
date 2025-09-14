@@ -1,4 +1,5 @@
 package memento.guistate;
+import java.time.LocalDateTime;
 
 public class Model {
     private int[] options = new int[3];
@@ -27,9 +28,13 @@ public class Model {
         return isSelected;
     }
 
+    public LocalDateTime getTime() {
+        return LocalDateTime.now();
+    }
+
     // method to save the state of the model
     public IMemento createMemento() {
-        return new Memento(options, isSelected);
+        return new Memento(options, isSelected, getTime());
     }
 
     // method to restore the state of the model
