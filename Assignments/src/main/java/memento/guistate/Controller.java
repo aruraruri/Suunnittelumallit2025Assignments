@@ -7,32 +7,30 @@ public class Controller {
     private Model model;
     private Gui gui;
     private List<IMemento> history;
-    private List<IMemento> redoHistory;// Memento history
+    private int currentIndex;
 
     public Controller(Gui gui) {
         this.model = new Model();
         this.gui = gui;
         this.history = new ArrayList<>();
-        this.redoHistory = new ArrayList<>();
-    }
+        this.currentIndex = -1;
 
-    public List<IMemento> getHistory() {
-        return history;
-    }
-
-    public List<IMemento> getRedoHistory() {
-        return redoHistory;
     }
 
     public void setOption(int optionNumber, int choice) {
-        addToHistory();
-        clearRedoHistory();
+        removeRedoHistoryAfterCurrentlySelectedIndex();
         model.setOption(optionNumber, choice);
+        addToHistory();
         gui.updateGui();
+
+
     }
 
-    public void clearRedoHistory() {
-        redoHistory.clear();
+    // Redo history should be cleared when a new action is performed
+    public void removeRedoHistoryAfterCurrentlySelectedIndex() {
+        if (currentIndex < history.size() - 1) {
+            history = new ArrayList<>(history.subList(0, currentIndex + 1));
+        }
     }
 
     public int getOption(int optionNumber) {
@@ -40,52 +38,58 @@ public class Controller {
     }
 
     public void setIsSelected(boolean isSelected) {
-        addToHistory();
+        removeRedoHistoryAfterCurrentlySelectedIndex();
         model.setIsSelected(isSelected);
+        addToHistory();
+
     }
 
     public boolean getIsSelected() {
         return model.getIsSelected();
     }
 
-    public void restoreState(IMemento memento) {
+    public void restoreState(int index) {
+        IMemento memento = history.get(index);
         model.restoreState(memento);
+        //currentIndex = index;
         gui.updateGui();
+        System.out.println("Restored state to index: "+index);
     }
 
     public void undo() {
-        if (!history.isEmpty()) {
-            // add current state to redo history
-            redoHistory.add(model.createMemento());
-            System.out.println("Memento found in history");
-            IMemento previousState = history.remove(history.size() - 1);
-            restoreState(previousState);
+        if (currentIndex > 0) {
+            currentIndex--;
+            IMemento previousState = history.get(currentIndex);
+            model.restoreState(previousState);
             gui.updateGui();
         }
+        System.out.println("Undo action performed, current index: "+currentIndex);
     }
 
     public void redo() {
-        if (!redoHistory.isEmpty()) {
-            // add current state to history
-            history.add(model.createMemento());
-            System.out.println("Memento found in history");
-            IMemento redoState = redoHistory.remove(redoHistory.size() - 1);
-            restoreState(redoState);
+        if (currentIndex < history.size() - 1) {
+            currentIndex++;
+            IMemento nextState = history.get(currentIndex);
+            model.restoreState(nextState);
             gui.updateGui();
         }
+        System.out.println("Redo action performed, current index: "+currentIndex);
     }
 
     private void addToHistory() {
         IMemento currentState = model.createMemento();
         history.add(currentState);
+        currentIndex = history.size() - 1; // Set currentIndex to the last element
+        gui.updateGui();
     }
 
-    public void reorganizeHistoriesAroundIndex(int index) {
+    public List<IMemento> getHistory() {
+        return history;
+    }
 
-        // move all mementos after index to redoHistory
-        for (int i = history.size() - 1; i > index; i--) {
-            IMemento memento = history.remove(i);
-            redoHistory.add(0, memento); // add to the front of redoHistory
-        }
+    public void addInitialState() {
+        IMemento currentState = model.createMemento();
+        history.add(currentState);
+        currentIndex = history.size() - 1;
     }
 }

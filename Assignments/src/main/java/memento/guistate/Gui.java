@@ -73,6 +73,7 @@ public class Gui extends Application {
                 // Ctrl-Y: redo
                 System.out.println("Redo key combination pressed");
                 controller.redo();
+
             }
         });
 
@@ -86,6 +87,8 @@ public class Gui extends Application {
         stage.setTitle("Memento Pattern Example");
         stage.show();
         historyStage.show();
+
+        controller.addInitialState();
     }
 
     public void updateGui() {
@@ -95,24 +98,16 @@ public class Gui extends Application {
         colorBox3.setColor(controller.getOption(3));
         checkBox.setSelected(controller.getIsSelected());
 
-        // update undo history list
+        // update history list
         historyMetaData.getItems().clear();
         for (IMemento memento : controller.getHistory()) {
             historyMetaData.getItems().add(String.valueOf(memento.getTime()));
         }
-        // same for redo history
-        for (IMemento memento : controller.getRedoHistory()) {
-            historyMetaData.getItems().add(String.valueOf(memento.getTime()));
-        }
+
         // add keypress observers to all history list items
         historyMetaData.setOnMouseClicked(event -> {
             int selectedIndex = historyMetaData.getSelectionModel().getSelectedIndex();
-            if (selectedIndex >= 0 && selectedIndex < controller.getHistory().size()) {
-                IMemento selectedMemento = controller.getHistory().get(selectedIndex);
-                controller.restoreState(selectedMemento);
-            }
-            controller.reorganizeHistoriesAroundIndex(selectedIndex);
-            updateGui();
+            controller.restoreState(selectedIndex);
         });
     }
 }
