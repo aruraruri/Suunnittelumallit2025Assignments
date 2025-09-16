@@ -8,7 +8,7 @@ public class Main {
         // create datasets
         int[] bigIntArray = new int[100000];
         for (int i=0; i<bigIntArray.length-1; i++) {
-            bigIntArray[i] = getRandomNumber(-1000000, 100000);
+            bigIntArray[i] = getRandomNumber(-10000000, 1000000);
         }
 
         int[] smolIntArray = new int[30];
@@ -19,7 +19,7 @@ public class Main {
         // change sort type here
         SorterContext sorter = new SorterContext(new HeapSort());
         //sorter.setSortStrategy(new BubbleSort());
-        //sorter.setSortStrategy(new QuickSort());
+        sorter.setSortStrategy(new QuickSort());
 
         long sortBigStartTimeMs = System.nanoTime() / 1000000;
         sorter.sort(bigIntArray);
