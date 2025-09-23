@@ -5,6 +5,7 @@ public class Main {
         CalendarToNewDateAdapter customCalendar = new CalendarToNewDateAdapter();
         customCalendar.setDay(19);
         customCalendar.setMonth(9);
+        customCalendar.setYear(2026);
 
         customCalendar.advanceDays(12);
 
