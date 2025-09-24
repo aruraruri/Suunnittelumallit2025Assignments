@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 
 public class BuildingTile implements Tile {
     private Image img;
-    private int[] pos = new int[2];
 
     public BuildingTile(Image img) {
         this.img = img;
@@ -15,16 +14,6 @@ public class BuildingTile implements Tile {
         return "building";
     }
 
-    @Override
-    public void setPosition(int posX, int posY) {
-        pos[0] = posX;
-        pos[1] = posY;
-    }
-
-    @Override
-    public int[] getPosition() {
-        return pos;
-    }
     @Override
     public Image getImg () {
         return img;

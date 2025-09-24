@@ -16,16 +16,6 @@ public class RoadTile implements Tile {
     }
 
     @Override
-    public void setPosition(int posX, int posY) {
-        pos[0] = posX;
-        pos[1] = posY;
-    }
-
-    @Override
-    public int[] getPosition() {
-        return pos;
-    }
-    @Override
     public Image getImg () {
         return img;
     }
