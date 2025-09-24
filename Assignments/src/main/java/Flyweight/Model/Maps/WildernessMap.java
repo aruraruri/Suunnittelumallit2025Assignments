@@ -19,7 +19,7 @@ public class WildernessMap implements Map {
         Random r = new Random();
 
         for (int i=0; i<25; i++) {
-            switch (tileTypes.get(r.nextInt(2))) {
+            switch (tileTypes.get(r.nextInt(3))) {
                 case "forest":
                     tiles.add(new RoadTile(tileImgFactory.requestImage("forest")));
                     break;

@@ -7,13 +7,15 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 public class TileImageFactory {
-    private HashMap<String, Image> cachedImages;
+    private final HashMap<String, Image> cachedImages;
 
     public TileImageFactory() {
         cachedImages = new HashMap<>();
     }
 
     public Image requestImage(String type) {
+        System.out.println("Requesting image of type: " + type);
+        System.out.println("Cached images: " + cachedImages.keySet());
         if (cachedImages.get(type) != null) {
             return cachedImages.get(type);
         } else {
