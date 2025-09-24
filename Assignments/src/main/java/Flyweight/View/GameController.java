@@ -3,12 +3,16 @@ package Flyweight.View;
 import Flyweight.Model.Game;
 import Flyweight.Model.Tiles.Tile;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 import java.util.List;
 
 public class GameController {
     private Game game;
+    private final int tileSize = 120;
+    private final int gridSize = 600;
+
 
     @FXML
     private GridPane tileGrid;
@@ -16,7 +20,17 @@ public class GameController {
     public void startGame() {
         game = new Game();
         List<Tile> tiles = game.getMap().getTiles();
-        tileGrid.getColumnCount();
-        tileGrid.getRowCount();
+        int col = 0;
+        int row = 0;
+        for (int i=0;i<tiles.size();i++) {
+            ImageView imageView = new ImageView(tiles.get(i).getImg());
+            tileGrid.add(imageView, col, row);
+            col++;
+            if (col>=5) {
+                col = 0;
+                row++;
+            }
+        }
+
     }
 }

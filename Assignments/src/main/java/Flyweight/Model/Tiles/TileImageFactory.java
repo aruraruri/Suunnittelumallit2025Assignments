@@ -18,7 +18,7 @@ public class TileImageFactory {
             return cachedImages.get(type);
         } else {
             try {
-                cachedImages.put(type, new Image(new FileInputStream("/img/"+type+".png")));
+                cachedImages.put(type, new Image(new FileInputStream("C:\\Users\\D\\IdeaProjects\\Suunnittelumalit2025Assignments\\Assignments\\src\\main\\resources\\img\\" + type + ".png")));
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }

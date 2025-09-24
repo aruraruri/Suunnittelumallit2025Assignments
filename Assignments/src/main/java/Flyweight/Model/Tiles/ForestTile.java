@@ -25,7 +25,7 @@ public class ForestTile implements Tile {
     public int[] getPosition() {
         return pos;
     }
-
+    @Override
     public Image getImg () {
         return img;
     }

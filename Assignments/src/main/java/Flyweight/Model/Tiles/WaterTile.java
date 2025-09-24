@@ -1,14 +1,32 @@
 package Flyweight.Model.Tiles;
 
-public class WaterTile implements Tile {
+import javafx.scene.image.Image;
 
-    @Override
-    public String getCharacter() {
-        return "W";
+public class WaterTile implements Tile {
+    private Image img;
+    private int[] pos = new int[2];
+
+    public WaterTile(Image img) {
+        this.img = img;
     }
 
     @Override
     public String getType() {
-        return "Water";
+        return "water";
+    }
+
+    @Override
+    public void setPosition(int posX, int posY) {
+        pos[0] = posX;
+        pos[1] = posY;
+    }
+
+    @Override
+    public int[] getPosition() {
+        return pos;
+    }
+    @Override
+    public Image getImg () {
+        return img;
     }
 }

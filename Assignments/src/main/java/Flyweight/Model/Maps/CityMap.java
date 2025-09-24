@@ -9,22 +9,22 @@ import java.util.Random;
 
 public class CityMap implements Map{
     private List<Tile> tiles;
-    private TileImageFactory tileFactory;
+    private TileImageFactory tileImgFactory;
     List<String> tileTypes = Arrays.asList("road","building");
 
     public CityMap() {
         tiles = new ArrayList<>();
-        tileFactory = new TileImageFactory();
+        tileImgFactory = new TileImageFactory();
 
         Random r = new Random();
 
         for (int i=0; i<25; i++) {
             switch (tileTypes.get(r.nextInt(2))) {
                 case "road":
-                    tiles.add(new RoadTile(tileFactory.requestImage("road")));
+                    tiles.add(new RoadTile(tileImgFactory.requestImage("road")));
                     break;
                 case "building":
-                    tiles.add(new BuildingTile(tileFactory.requestImage("building")));
+                    tiles.add(new BuildingTile(tileImgFactory.requestImage("building")));
                     break;
             }
         }
