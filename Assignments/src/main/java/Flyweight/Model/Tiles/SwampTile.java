@@ -1,4 +1,4 @@
-package Flyweight;
+package Flyweight.Model.Tiles;
 
 public class SwampTile implements Tile {
 

@@ -1,4 +1,4 @@
-package Flyweight;
+package Flyweight.Model.Tiles;
 
 public class BuildingTile implements Tile {
 

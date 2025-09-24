@@ -1,4 +1,9 @@
-package Flyweight;
+package Flyweight.Model.Maps;
+
+import Flyweight.Model.Tiles.ForestTile;
+import Flyweight.Model.Tiles.SwampTile;
+import Flyweight.Model.Tiles.Tile;
+import Flyweight.Model.Tiles.WaterTile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
