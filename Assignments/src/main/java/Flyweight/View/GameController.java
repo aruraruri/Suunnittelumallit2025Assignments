@@ -1,8 +1,11 @@
 package Flyweight.View;
 
 import Flyweight.Model.Game;
+import Flyweight.Model.Tiles.Tile;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
+
+import java.util.List;
 
 public class GameController {
     private Game game;
@@ -12,6 +15,8 @@ public class GameController {
 
     public void startGame() {
         game = new Game();
-        game.getMap().display();
+        List<Tile> tiles = game.getMap().getTiles();
+        tileGrid.getColumnCount();
+        tileGrid.getRowCount();
     }
 }
