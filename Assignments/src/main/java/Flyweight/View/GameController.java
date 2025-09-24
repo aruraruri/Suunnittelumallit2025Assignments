@@ -10,9 +10,6 @@ import java.util.List;
 
 public class GameController {
     private Game game;
-    private final int tileSize = 120;
-    private final int gridSize = 600;
-
 
     @FXML
     private GridPane tileGrid;
