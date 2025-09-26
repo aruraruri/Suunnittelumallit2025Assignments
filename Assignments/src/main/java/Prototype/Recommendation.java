@@ -18,6 +18,10 @@ public class Recommendation implements Prototype{
         bookList.add(book);
     }
 
+    public void removeBook(int bookIdx) {
+        bookList.remove(bookIdx);
+    }
+
     public String getGenre() {
         return genre;
     }
@@ -28,6 +32,8 @@ public class Recommendation implements Prototype{
 
     @Override
     public Recommendation clone() {
+        String genre = this.genre;
+        List<Prototype> bookList = new ArrayList<>(this.bookList);
         return new Recommendation(genre, bookList);
     }
 
