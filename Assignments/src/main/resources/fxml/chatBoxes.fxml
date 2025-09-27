@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Mediator.ChatController1">
+   <children>
+      <HBox prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <VBox prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <ListView fx:id="messagesListView" prefHeight="391.0" prefWidth="600.0" />
+                  <TextField fx:id="sendToTextField" promptText="Send to... ?" />
+                  <TextField fx:id="chatTextField" promptText="Message:" />
+               </children>
+            </VBox>
+            <Button fx:id="sendMessageButton" mnemonicParsing="false" onAction="#sendMessage" prefHeight="400.0" prefWidth="237.0" text="Send Msg" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
